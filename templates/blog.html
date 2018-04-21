@@ -1,0 +1,42 @@
+{% extends base.html %}
+{% block content %}
+<!--  my template     -->
+		<form  action= '/newpost' methods='post'>
+			<nav>
+				<a href="Main Blog Post">Main Blog Post</a> |
+				<p class="post_title"><a href="/blog?id="+{{ str(ids) }}>Main Blog Post</a></p>|
+				<a href="blog.html">Add a Blog Entry</a> 
+			</nav>
+			<h2  style="text-align:center">Add a Blog Entry</h2>
+			<div>
+			<table>
+				<tr><td><label>Title for your Blog </label></td></tr>
+				<tr><td><input  type='text' name ='blog_title'/></td></tr>
+			</table> 
+				<h4 class="error">{{ title_error }}</h4>
+			<br><br>
+			<div>
+			<table> 
+				<tr></td><label>Your new Blog </label> </td></tr> 
+				<tr><td><textarea type="text" name="body"/></textarea></td></tr>
+			</table> 
+			<h4 class="error">{{ body_error }}</h4>
+			<input  type='submit' name='submit'  value = 'Add Entry'/> 
+		
+		</form> <br>
+		
+		<form  action= '/blog' methods='get' name="allposts">
+			<nav>
+				<a href="Main Blog Post">Main Blog Post</a> |
+				<p class="post_title"><a href="/blog?id="+{{ str(ids) }}>Main Blog Post</a></p>|
+				<a href="blog.html">Add a Blog Entry</a> 
+			</nav>	
+		{% for titlepost and bodypost in allpost %}
+        
+            <p class="post_title"><a href="/blog?id="+"{{ str(id) }}">{{ new_blog}}</a></p>
+            <p><a href="/blog?id="+"{{ str(id) }}">{{ new_blog}}</a></p>
+		
+		{% end for %}
+		/form>
+{% end block %}
+

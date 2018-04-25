@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, url_for
+from flask import Flask, request, session, redirect, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 import cgi
 
@@ -19,7 +19,6 @@ app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
 class Blog(db.Model):
-
     id = db.Column(db.Integer, primary_key=True)
     blog_title = db.Column(db.String(120))
     blog_body  = db.Column(db.String(300))
@@ -29,18 +28,6 @@ class Blog(db.Model):
         self.blog_title= blog_title
         self.blog_body= blog_body
         self.posted = False
-
-def valid_title(title):
-	title_message=[]
-	if len(title)>0:
-		return True	
-	else:
-		title_error="The title can not be empty.Enter a title for your new-post"
-		return  False
-def valid_body(body):
-	if len(body)>0:
-		return True
-	return  False
 
 allpost=[] 
 errtitle_message=[]
@@ -90,5 +77,5 @@ def newpost():
 		 # If request is a get request, render page that holds a newpost form with all variables being set to empty strings("")
 	return render_template('newpost.html', title_error=title_error, body_error=body_error)
 
-if __name__ == '__main__':
-   app.run()
+	if __name__ == '__main__':
+	   app.run()

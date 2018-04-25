@@ -40,7 +40,6 @@ def valid_title(title):
 		title_error = "The title can not be empty.Enter a title for your new-post"
 		return False
 
-
 def valid_body(body):
 	if len(body) > 0:
 		return True
@@ -61,15 +60,11 @@ def index():
 	if blog_id:
 		blogs = Blog.query.get(blog_id)
 
-		#Then, copy the file .travis/database.json to pymysql/tests/databases.json and edit the new file to match your MySQL configuration
-
 		return render_template('displayentry.html', blogs=blogs)
 		#Render page that holds all blogs
 	return render_template('showall.html', blogs=Blog.query.all().order_by(Blog.id.desc())
-
 @app.route('/newpost', methods=['POST', 'GET'])
 def newpost():
-
     if request.method == 'GET':
         return render_template("blog.html", title_error="", body_error="")
     elif request.method == 'POST':

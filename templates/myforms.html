@@ -1,11 +1,7 @@
-{%  extends base.html  %}
+{%  extends base.html %}
 {% block content %}
-		<form  action= 'newpost' methods='post' name="myform1">
-			<nav>
-				<a href="Main Blog Post">Main Blog Post</a> |
-				<p class="post_title"><a href="/blog?id="+{{ str(ids) }}>Main Blog Post</a></p>|
-				<a href="blog.html">Add a Blog Entry</a> 
-			</nav>
+		<form  action= '/newpost' methods='post' name="myform1">
+
 			<h2  style="text-align:center">Add a Blog Entry</h2>
 			<div>
 			<table>
@@ -16,7 +12,7 @@
 			<br><br>
 			<div>
 	</form>
-	<form action="pierre" name="myform2" methods='post'>
+	<form action="/pierre" name="myform2" methods='post'>
 			<table> 
 				<tr></td><label>Your new Blog </label> </td></tr> 
 				<tr><td><textarea type="text" name="body"/></textarea></td></tr>
@@ -24,6 +20,6 @@
 			<h4 class="error">{{ body_error }}</h4>
 			<input  type='submit' name='submit'  value = 'Add Entry'/> 
 		
-	</form> <br>
+	</form> 
 		
 {% endblock %}

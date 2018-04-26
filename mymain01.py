@@ -33,17 +33,27 @@ allpost=[]
 errtitle_message=[]
 errbody_message=[]
 ids=[]
-
+def get_current_postid( ):
+	blogs=Blog.query.all().order_by(Blog.id.desc())
+	current_post_id=blogs.id.first()
+	return current_post_id
+def get_currentpost():
+	blogs=Blog.query.all().order_by(Blog.id.desc())
+	blog_title=blogs.blog_title.first()
+	return blogs.query.filter_by(id=get_current_postid()).blog_title
 @app.route('/blog', methods=['GET'])
 def index():
 	# variable blog_id for requesting id from database
 	blog_id = request.args.get('id')
+	blog_title=request.args.get('blog_title')
+	blog_body=request.args.get('blog_body')
+	
 	# If request is true grab blog using id and render template that returns single blog post
-	if blog_id:
+	if blog_id==Blog.query.order_by(Blog.id.desc()):
 		blogs = Blog.query.get(blog_id)
 		return render_template('displayentry.html', blogs=blogs)
 		#Render page that holds all blogs
-	return render_template('showall.html', blogs=Blog.query.all().order_by(Blog.id.desc())
+	return render_template('showall.html', blogs=Blog.query.order_by(Blog.id.desc()).all())
 @app.route('/newpost', methods=['POST','GET'])
 def newpost():
 	if request.method=="GET":
@@ -77,5 +87,5 @@ def newpost():
 		 # If request is a get request, render page that holds a newpost form with all variables being set to empty strings("")
 	return render_template('newpost.html', title_error=title_error, body_error=body_error)
 
-	if __name__ == '__main__':
-	   app.run()
+if __name__ == '__main__':
+   app.run()

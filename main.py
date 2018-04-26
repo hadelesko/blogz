@@ -56,7 +56,7 @@ def index():
 		blogs = Blog.query.get(blog_id)
 		return render_template('displayentry.html', blogs=blogs)
 		#Render page that holds all blogs
-	return render_template('showall.html', blogs=Blog.query.all().order_by(Blog.id.desc())
+	return render_template('showall.html', blogs=Blog.query.order_by(Blog.id.desc()).all())
 @app.route('/newpost', methods=['POST','GET'])
 def newpost():
 	if request.method=="GET":
@@ -86,7 +86,7 @@ def newpost():
 			db.session.commit()      # confirmation of adding the new post to the database
 			allpost.append(new_blog) # adding the new blog to the list
 			# Redirect to individual blog post using current blog's information, id is automatically
-			return redirect('/blog?id={1}'.format(new_blog.id))
+			return redirect('/blog?id='+str(new_blog.id))
 		 # If request is a get request, render page that holds a newpost form with all variables being set to empty strings("")
 	return render_template('newpost.html', title_error=title_error, body_error=body_error)
 

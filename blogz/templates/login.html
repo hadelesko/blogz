@@ -3,11 +3,12 @@
 {% block content %} 
 
 <h1>Login</h1>
-<form action="/" method="POST">
+<p>If you don't have an account, you may <a href="/signup">register</a> for one</p>
+<form action="/login" method="POST">
     <table>
         <tr>
             <td>
-                <label>Username</label>
+                <label for ="username">Username</label>
             </td>
             <td>
                 <input type="text" name="username"> 
@@ -18,7 +19,7 @@
         </tr>
         <tr>
             <td>
-                <label> Password</label>
+                <label for="password">Password</label>
             </td>
             <td>
                 <input type="password" name="password">
@@ -36,3 +37,4 @@
     </table>
 </form>
 {% endblock %}
+

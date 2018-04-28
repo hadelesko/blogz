@@ -18,7 +18,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:password@localhos
 app.config['SQLALCHEMY_ECHO'] = True
 blogs=db.relationship('movie', backref=owner)
 db = SQLAlchemy(app)
-app.secret_key = 'y337kGcys&zP3B'
+app.secret_key = 'danken'
 
 
 class User(db.Model):
@@ -47,7 +47,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(username=username).first()
         if user and user.password == password:
             session['username'] = username
             flash("Logged in")
@@ -59,14 +59,14 @@ def login():
 
 
 @app.route('/signup', methods=['POST', 'GET'])
-def register():
+def  signup():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
 
         # TODO - validate user's data
 
-        existing_user = User.query.filter_by(email=email).first()
+        existing_user = User.query.filter_by(username=username).first()
         if not existing_user:
             new_user = User(username, password)
             db.session.add(new_user)
@@ -75,6 +75,7 @@ def register():
             return redirect('/')
         else:
             # TODO - user better response messaging
+            
             return "<h1>Duplicate user</h1>"
 
     return render_template('signup.html')

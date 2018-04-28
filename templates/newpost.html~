@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <!--  my template     -->
-		<form  action= '/newpost' methods='post'>
+		<form  action= '/newpost' methods='POST'>
 			<h2  style="text-align:center">Add a Blog Entry</h2>
 			<div>
 			<table>
@@ -14,7 +14,7 @@
 			<table>
 				<tr></td><label>Your new Blog </label> </td></tr> 
 				<tr><td><textarea type="text" name="blog_body"></textarea></td></tr>
-				<tr><td><h4 class="error">{{ title_error }}</h4></td></tr>
+				<tr><td><h4 class="error">{{ body_error }}</h4></td></tr>
 			</table>
 			<input type='submit' name='submit'  value ='Add Entry'/>
 		</form>

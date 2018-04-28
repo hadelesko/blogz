@@ -67,9 +67,9 @@ def newpost():
 	error_message=[]		#error_message=[error_title, error_body]
 	##						error_title=error_message[0]
 	##						error_body=error_message[1]
-	if request.method=="GET":
-		return render_template("blog.html", title_error="", body_error="")
-	elif request.method=="POST":
+#	if request.method=="GET":
+#		return render_template("blog.html", title_error="", body_error="")
+	if request.method=="POST":
 		blog_title=request.form["blog_title"]
 		blog_body=request.form["blog_body"]
 
@@ -96,7 +96,10 @@ def newpost():
 			# allpost.append(new_blog) # adding the new blog to the list
 			# Redirect to individual blog post using current blog's information, id is automatically
 			return redirect('/blog?id='+str(new_blog.id))
-		return render_template('newpost.html', title_error=error_message[0], body_error=error_message[1])
+		else:
+			return render_template('newpost.html', title_error=error_message[0], body_error=error_message[1])
+	else:
+		return render_template('newpost.html')
 
 
 if __name__ == '__main__':

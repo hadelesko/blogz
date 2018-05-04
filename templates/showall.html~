@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 <!--Show all the post-->
 {% block content %} 
-	<h1 align='center'>Build A Blog</h1>
-	{% if blogs|length == 0 %}
-		<p>There is no blog yet!</p>
+	<h1 align='center'> Blog users</h1>
+	{% if owners|length == 0 %}
+	<p>No user  blogs till nown!</p>
 	{% else %}
-		{% for blog in blogs %}
-			<p align: "center"><h2><a href="blog?id={{ blog.id }}">{{ blog.blog_title }}</a></h2></p>
-			<p><h4>{{ blog.blog_body }}</h4></p>
+		{% for user in users %}
+		{% if blogs|length == 0 %}
+			<p>The user has no blog yet!</p>
+		{% else %}
+			{% for blog in blogs %}
+				<p align: "center"><h2><a href="blog?userId={{ user.id }}">{{ blog.blog_title }}</a></h2></p>
+				<p><h4>{{ blog.blog_body }}</h4></p>
+				<p><small><em>Written By:</em><a href='/blog?user={{blog.owner.id}}'>{{blog.owner.username}}</a></small></p>
+			{%  endfor  %}
 			<hr/>
-		{%  endfor  %}
-{% endif %}
+		{% endif %}
+	{% endfor%}
+	{% endif %}
 {%  endblock  %}

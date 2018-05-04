@@ -1,20 +1,13 @@
 {%  extends "base.html"  %}
-{% block content %}
-		<form  action= "/newpost"  method='POST'>
-			<h2  style="text-align:center">Add a Blog Entry</h2>
-			<div>
-			<table>
-				<tr><td><label>Title for your Blog </label></td></tr>
-				<tr><td><input  type='text' name ='blog_title'/></td></tr>
-			</table> 
-				<h4 class="error">{{ title_error }}</h4>
-			<br><br>
-			<div>
-			<table> 
-				<tr></td><label>Your new Blog </label> </td></tr> 
-				<tr><td><textarea type="text" name="blog_body"/></textarea></td></tr>
-			</table> 
-			<h4 class="error">{{ body_error }}</h4>
-			<input  type='submit' name='submit'  value = 'Add Entry'/> 
-		</form>
-{%  endblock  %}
+{%  block content  %}
+<p><h3>Blog posts</h3>
+	{% if blogs|length==0  %}
+	<p>No blog yet!</p>
+	{% else %}
+		{% for blog in blogs %}
+			<h3><a href='/blog?id={{blog.id}}'>{{blog.blog_title}}</a></h3>
+			<p>{{blog.blog_body}}</p>
+			<p><small><em>Written by </em><a href="/blog?user={{blog.owner.id}}">{{blog.owner.username}}</a></small></p>
+		{%  endfor  %}
+	{% endif %}
+{% endblock %}

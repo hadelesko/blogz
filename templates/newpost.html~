@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <!--  my template     -->
-		<form  action= '/newpost' methods='POST'>
+		<form  action= '/newpost' method='POST'>
 			<h2  style="text-align:center">Add a Blog Entry</h2>
 			<div>
 			<table>

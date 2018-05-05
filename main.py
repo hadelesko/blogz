@@ -6,7 +6,7 @@ import cgi
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:blogz@localhost:3306/blogz'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:blogz@localhost:8889/blogz'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 app.secret_key = 'danken'
@@ -35,11 +35,11 @@ class User(db.Model):
         self.username = username
         self.password = password
 ###############################################################################
-	@app.before_request
-	def require_login():
-		allowed_routes = ['login', 'blog', 'signup', 'index', ]
-		if request.endpoint not in allowed_routes and 'username' not in session:
-			return redirect('/login')
+@app.before_request
+def require_login():
+	allowed_routes = ['login', 'blog', 'signup', 'index', ]
+	if request.endpoint not in allowed_routes and 'username' not in session:
+		return redirect('/login')
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
